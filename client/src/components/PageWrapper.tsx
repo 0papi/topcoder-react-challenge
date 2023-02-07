@@ -5,7 +5,12 @@ const PageWrapper = ({ children }: PropsWithChildren) => {
   return (
     <div>
       <Navbar />
-      <main>{children}</main>
+      <main
+        className="max-w-[90%] mx-auto mt-4 py-10
+      "
+      >
+        {children}
+      </main>
     </div>
   );
 };
