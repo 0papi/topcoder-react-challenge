@@ -1,4 +1,4 @@
-import { PageWrapper } from "../components";
+import {PageWrapper, UserThumbnail} from "../components";
 
 const cardStyles = "bg-white shadow-lg rounded-md p-4  w-full";
 
@@ -21,13 +21,14 @@ const Profile = () => {
       <div className="flex items-center justify-center max-w-2xl mx-auto">
         <div className="flex items-start flex-col">
           <div className={`flex items-center flex-col ${cardStyles} mb-4`}>
-            <div className="w-[150px] h-[150px] rounded-full bg-gray-300 flex items-center justify-center">
-              <img
-                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                className="w-full h-full object-cover rounded-full"
-                alt="user profile avatar"
-              />
-            </div>
+            {/*<div className="w-[150px] h-[150px] rounded-full bg-gray-300 flex items-center justify-center">*/}
+            {/*  <img*/}
+            {/*    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"*/}
+            {/*    className="w-full h-full object-cover rounded-full"*/}
+            {/*    alt="user profile avatar"*/}
+            {/*  />*/}
+            {/*</div>*/}
+            <UserThumbnail />
             <h3
               className="font-bold text-base my-1
             "

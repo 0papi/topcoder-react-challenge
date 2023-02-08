@@ -1,5 +1,5 @@
 import {Link, useNavigate} from "react-router-dom";
-import { useState, ChangeEvent } from "react";
+import {useState, ChangeEvent, useEffect} from "react";
 import {toast} from "react-toastify";
 import {encryptPassword} from "../utils/passwordHash";
 
@@ -12,10 +12,16 @@ const Login = () => {
 
   const navigate = useNavigate()
 
-
-  // get user data from localstorage
   const userData = JSON.parse(localStorage.getItem('userData')!)
-  console.log(userData.password);
+
+useEffect(() => {
+  if(!userData){
+    navigate('/register')
+  }
+}, [])
+
+
+
 
   /**
    * @description user registration handler
@@ -23,6 +29,7 @@ const Login = () => {
    */
 
   const handleUserRegister = (e: ChangeEvent<HTMLFormElement>) => {
+    // get user data from localstorage
     e.preventDefault();
 
     if(userPwd.trim().length <= 0 || userPwd.trim().length <= 0){
