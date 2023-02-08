@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
     <header className="bg-gray-800 p-3">
       <nav className=" flex justify-between items-center max-w-[90%] mx-auto">
         <Link to="/" className="font-bold text-xl text-white">
-          Medium
+          M
         </Link>
         <div>
           <ul className="flex">

@@ -1,4 +1,5 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
+
 import CreateLearningSpace from "./pages/CreateLearningSpace";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -14,6 +15,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<CreateLearningSpace />} />
         <Route path="/profile" element={<Profile />} />
+
+
       </Routes>
     </BrowserRouter>
   );

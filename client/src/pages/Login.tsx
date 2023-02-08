@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useState, ChangeEvent } from "react";
+import {toast} from "react-toastify";
+import {encryptPassword} from "../utils/passwordHash";
 
 const blockInput = "block";
 const formWrapperClasses = "flex items-start flex-col space-y-1 mb-2";
@@ -7,9 +9,13 @@ const Login = () => {
   // create application states here
   const [userEmail, setUserEmail] = useState("");
   const [userPwd, setUserPwd] = useState("");
-  const [username, setUsername] = useState("");
 
-  console.table({ userEmail, username, userPwd });
+  const navigate = useNavigate()
+
+
+  // get user data from localstorage
+  const userData = JSON.parse(localStorage.getItem('userData')!)
+  console.log(userData.password);
 
   /**
    * @description user registration handler
@@ -18,7 +24,23 @@ const Login = () => {
 
   const handleUserRegister = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit user data");
+
+    if(userPwd.trim().length <= 0 || userPwd.trim().length <= 0){
+      toast.error('Please provide all fields')
+      return;
+    }
+
+  //   encrypt user password
+    const encryptNewlyEnteredPassword = encryptPassword(userPwd)
+
+
+  //   check if newly entered userData is the same as what is stored in localStorage
+    if(encryptNewlyEnteredPassword === userData.password && userEmail === userData.email) {
+      toast.success('Successfully logged in')
+      navigate('/create')
+    } else {
+      toast.error('Email or Password incorrect')
+    }
   };
 
   return (

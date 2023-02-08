@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, ChangeEvent } from "react";
+import {toast} from "react-toastify";
+import {encryptPassword} from "../utils/passwordHash";
 
 const blockInput = "block";
 const formWrapperClasses = "flex items-start flex-col space-y-1 mb-2";
@@ -8,6 +10,7 @@ const Signup = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPwd, setUserPwd] = useState("");
   const [username, setUsername] = useState("");
+  const navigate = useNavigate()
 
   console.table({ userEmail, username, userPwd });
 
@@ -18,7 +21,25 @@ const Signup = () => {
 
   const handleUserRegister = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit user data");
+    if(username.trim().length <= 0 || userPwd.trim().length <= 0 || userPwd.trim().length <= 0){
+      toast.error('Please provide all fields')
+      return;
+    }
+
+    // encrypt password before storing in local storage
+    // ensure security before server is created
+    const encryptedPassword = encryptPassword(userPwd)
+
+    const userInformation = {
+      email: userEmail,
+      username,
+      password: encryptedPassword
+    }
+
+  //  here I am going to mock an authentication functionality by sending user data to local storage
+    localStorage.setItem('userData', JSON.stringify(userInformation))
+    toast.success('Successfully registered. Log in to continue')
+    navigate('/login')
   };
 
   return (
